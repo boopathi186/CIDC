@@ -1,3 +1,47 @@
-.body{
-   background-attachment: white !important;
+.sidebar {
+   width: 80px; 
+   height:35vh; 
+   background-color: #f4f7fc;
+   padding-top: 1rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: fixed; 
+   background: radial-gradient(circle at 10% 20%, rgb(237, 239, 247) 0%, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 84%);
+}
+
+.date-time-card, .leave-card {
+   background-color: #f4f7fc;
+   border-radius: 8px;
+
+}
+
+body, html {
+   overflow-x: hidden; 
+   height: 100vh;
+   background: radial-gradient(circle at 10% 20%, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 0%, rgb(215, 223, 252) 84%);
+}
+
+.main-content {
+   margin-left: 10px;
+   padding: 2rem;
+}
+
+
+.date-time-card h5, .leave-card h6 {
+   font-size: 16px;
+   margin-top: 1rem;
+   color: #333;
+}
+
+.leave-info {
+   font-size: 12px;
+   color: #666;
+}
+
+.sun{
+   color: rgb(238, 215, 11);
+}
+.row1{
+   height: 26vh;
 }

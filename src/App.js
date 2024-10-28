@@ -6,6 +6,8 @@ import Login from './components/forms/Login';
 import DashBoard from './pages/DashBoard';
 import NotFound from './pages/NotFoundPage';
 import PrivateRoute, { PrivateRoutes } from './components/private-Router/Private-Router';
+import GetUsers from './pages/GetUsers';
+import GetAttendance from './pages/GetAttendance';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           </>
           <Route element={<PrivateRoute />}>
             <Route path='/dashboard' element={<DashBoard />} />
+            <Route path='/attendance'  element={<GetAttendance/>}/>
+            <Route path='/users'  element={<GetUsers/>}/>
             <Route path='*' element={<NotFound />} />
           </Route>
 

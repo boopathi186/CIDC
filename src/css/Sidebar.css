@@ -1,1 +1,7 @@
 
+.navbars.active {
+    border-right: 2px solid #007bff; 
+    background-color: #f0f8ff; 
+    font-size: large;
+}
+

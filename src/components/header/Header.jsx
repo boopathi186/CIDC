@@ -33,7 +33,7 @@ const Header = (props) => {
     return (
         <div className='shadow'>
         <Dropdown>
-            <Dropdown.Toggle variant="bg-secondary border py-1  mb-2 mt-2 bg-light bg-opacity-10 m-0" id="dropdown-basic">
+            <Dropdown.Toggle variant="bg-secondary border-primary rounded-5 py-1 mb-2 mt-2 bg-white bg-opacity-10 m-0" id="dropdown-basic">
                 <img className="rounded-circle text-start p-0 mx-2" src={profilepic} width={20} height={20} alt='hotdeck_image' /> {name}
             </Dropdown.Toggle>
             <Dropdown.Menu variant=" white shadow   border-white m-0 p-0 ">
