@@ -7,6 +7,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../../css/Login.css';
+
 const Login = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -67,14 +68,12 @@ const Login = () => {
     return (
         <Row className="body row-cols-lg-2 m-0 vh-100">
             <Col lg={6} className="p-0 d-lg-block d-none text-center d-flex justify-content-center align-items-center">
-                <div className="d-flex text-white justify-content-center
-                align-items-center vh-100">
+                <div className="d-flex text-white justify-content-center align-items-center vh-100">
                     <h2 className='m-0 '>Welcome to the Login Page</h2>
-                    {/* <p className='m-0'> Enter your credentials to access your account.</p> */}
                 </div>
             </Col>
-            <Col lg={6} sm={12}>
-                <div className="login row m-0 d-flex align-items-center vh-100">
+            <Col lg={6} sm={12} className="d-flex justify-content-center align-items-center">
+                <div className="login w-100">
                     <div className="container bg-light col-12 form-control w-75 border border-0 rounded-3 shadow p-0">
                         <Formik
                             initialValues={{ userName: '', password: '' }}

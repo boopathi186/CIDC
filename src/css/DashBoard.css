@@ -8,6 +8,7 @@
    align-items: center;
    position: fixed; 
    background: radial-gradient(circle at 10% 20%, rgb(237, 239, 247) 0%, rgb(255, 255, 255) 0%, rgb(245, 245, 245) 84%);
+   /* background: #666; */
 }
 
 .date-time-card, .leave-card {
@@ -20,6 +21,8 @@ body, html {
    overflow-x: hidden; 
    height: 100vh;
    background: radial-gradient(circle at 10% 20%, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 0%, rgb(215, 223, 252) 84%);
+   /* background: #666; */
+
 }
 
 .main-content {

@@ -19,7 +19,7 @@ const SideBar = () => {
                         key={index}
                         to={item.path}
                         className={`navbars  nav-link mt-4 text-primary fw-semibold d-flex align-items-center justify-content-center fs-3 ${
-                            activeIndex === index ? 'active' : ''
+                            activeIndex === index ? 'active border-right' : ''
                         }`}
                         onClick={() => setActiveIndex(index)}
                     >

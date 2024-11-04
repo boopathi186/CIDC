@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDeleteAttendanceMutation, useDeleteUserMutation, UseDeleteUserMutation, useGetAttendanceQuery, useGetUsersQuery } from '../redux/ApiSlice';
+import { useDeleteAttendanceMutation, useGetAttendanceQuery } from '../redux/ApiSlice';
 import Header from '../components/header/Header';
 import SideBar from './SideBar';
-import { Button, Col, Pagination, Row, Spinner, Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import '../css/GetUsers.css'
+import { Col, Pagination, Row, Spinner } from 'react-bootstrap';
+import Toggle from '../components/header/Toggle';
+import AttendanceTable from './AttendanceTable';
+import '../css/GetAttendance.css';
 import Swal from 'sweetalert2';
 
 const GetAttendance = () => {
@@ -12,22 +13,17 @@ const GetAttendance = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [filteredData, setFilteredData] = useState([]);
 
-    const recordsPerPage = 10;
+    const recordsPerPage = 5;
     const firstIndex = currentPage * recordsPerPage;
     const lastIndex = firstIndex + recordsPerPage;
 
- 
-    const records = filteredData && filteredData.length > 0 ? filteredData.slice(firstIndex, lastIndex) : [];
-    const TotalPages = Math.ceil((filteredData ? filteredData.length : 0) / recordsPerPage);
-
-    const { data, isLoading, refetch } =useGetAttendanceQuery([]);
+    const { data, isLoading, refetch } = useGetAttendanceQuery([]);
     const [deleteAttendance] = useDeleteAttendanceMutation();
 
     useEffect(() => {
         refetch();
         if (data) {
             setFilteredData(data);
-            console.log(data);
         }
     }, [data, refetch]);
 
@@ -54,103 +50,52 @@ const GetAttendance = () => {
         if (data) {
             const filtered = data.filter((attendance) =>
                 attendance.attendance_id.includes(value) ||
-                attendance.status.toLowerCase().includes(value.toLowerCase()) 
+                attendance.status.toLowerCase().includes(value.toLowerCase())
             );
             setFilteredData(filtered);
             setCurrentPage(0);
         }
     };
 
-    const handlePageClick = (event) => {
-        const selectedPage = event.selected;
+    const handlePageClick = (selected) => {
+        const selectedPage = selected;
         setCurrentPage(selectedPage);
     };
 
+    const records = filteredData && filteredData.length > 0 ? filteredData.slice(firstIndex, lastIndex) : [];
+    const TotalPages = Math.ceil((filteredData ? filteredData.length : 0) / recordsPerPage);
+
     return (
         <div>
-            {isLoading ? (
-                <h4 className="d-flex text-danger mt-5 justify-content-center align-items-center vh-100">
-                    <Spinner animation="border" />
-                </h4>
-            ) : (
-                <Row className="m-0 p-0">
-                    <Col lg={2} className="p-0 m-0 vh-100 shadow d-lg-block d-none">
-                        <SideBar />
+            <Row className="p-0 m-0 mt-2 ">
+                <Col className='col-12 mt-2 shadow-sm '>
+                    <Col lg={12} className="border-bottom border-secondary border-opacity-25 text-end p-0 m-0 d-none d-lg-block ">
+                        <Header />
                     </Col>
-                    <Col lg={10} className="p-0 m-0">
-                        <Row className="border-bottom border-secondary border-opacity-25 text-end p-0 m-0">
-                            <Header />
-                        </Row>
-                        <div className="text-end container-fluid">
-                            <Row className="mt-3">
-                                <Col md={6}>
-                                    <div className="w-100 p-3 position-relative">
-                                        <i className="search bi bi-search text-secondary fs-3"></i>
-                                        <input
-                                            className="searchbar w-100 ps-5 shadow-sm rounded-4 border-0 p-3"
-                                            onChange={handleSearch}
-                                            type="text"
-                                            value={searchTerm}
-                                            placeholder="Search for names..."
-                                            title="Type in a name"
-                                        />
-                                    </div>
-                                </Col>
-                                <Col md={6} className="text-end">
-                                    <Link to="/userprofile/create">
-                                        <Button className="createButton border border-none shadow-sm mt-4 fw-semibold rounded-3 py-3" variant="none">
-                                            + Create Product
-                                        </Button>
-                                    </Link>
-                                </Col>
-                            </Row>
-                            <Table responsive bordered className="shadow mt-3">
-                                <thead className="sticky-top shadow-sm text-center">
-                                    <tr>
-                                        {['S.No', 'ID', 'UserId','Date', 'Record_In', 'Record_Out', 'Status','Action'].map((field) => (
-                                            <th key={field} className="text-danger bg-light fs-6 p-2">{field}</th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {records.length > 0 ? (
-                                        records.map((user, index) => (
-                                            <tr key={user.id} className="border-bottom">
-                                                <td className="text-center text-secondary">{firstIndex + index + 1}</td>
-                                                <td className="text-center">
-                                                    <Link className="text-decoration-none text-secondary" to={`/userProfile/${user.attendanceId}`}>
-                                                        {user.user.name}
-                                                    </Link>
-                                                </td>
-                                                <td className="text-center">{user.user.userId}</td>
-                                                <td className="text-center">{user.date}</td>
-                                                <td className="text-center">{(user.user.record_out)=="-"?"-":user.recordIn}</td>
-                                                <td className="text-center">{(user.user.record_out)=="-"?"-":user.recordOut}</td>
-                                                <td className="text-center">{user.status}</td>
-                                                <td className="text-center">
-                                                    <Button onClick={() => handleDelete(user.id)} variant="none px-sm-1 px-0">
-                                                        <i className="bi bi-trash3-fill text-danger px-1"></i>
-                                                    </Button>
-                                                    <Link to={`/userProfile/update/${user.id}`} className="px-1">
-                                                        <i className="edit bi bi-pencil-square"></i>
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    ) : (
-                                        <tr>
-                                            <td colSpan={6} className="text-center text-danger">
-                                                No matches found
-                                            </td>
-                                        </tr>
-                                    )}
-                                </tbody>
-                            </Table>
-                            <Pagination pageCount={TotalPages} onPageChange={handlePageClick} />
-                        </div>
+                    <Col className="d-lg-none p-0 m-0">
+                        <Toggle />
                     </Col>
-                </Row>
-            )}
+                </Col>
+            </Row>
+
+            <Row className="mt-5 mx-1 justify-content-center">
+                <Col lg={1} className="d-none d-lg-block">
+                    <SideBar />
+                </Col>
+                <Col lg={11} className="p-0">
+                    <AttendanceTable
+                        records={records}
+                        handleDelete={handleDelete}
+                        firstIndex={firstIndex}
+                        searchTerm={searchTerm}
+                        handleSearch={handleSearch}
+                        isLoading={isLoading}
+                    />
+                </Col>
+                <Col lg={11} className="d-flex justify-content-end mt-3 mb-3">
+                    <Pagination pageCount={TotalPages} handlePageClick={handlePageClick} />
+                </Col>
+            </Row>
         </div>
     );
 };

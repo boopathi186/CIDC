@@ -11,17 +11,19 @@ const Toggle = () => {
 
     return (
         <div className='row m-0 p-0'>
-            <div className='col-12 d-md-none p-0'>
+            <div className='col-6 d-md-none p-0'>
                 <Button variant="white border-end" onClick={handleShow}>Menu Bar</Button>
 
-                <Offcanvas show={show} onHide={handleClose}>
+                <Offcanvas className='w-25' show={show} onHide={handleClose}>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title>Menu</Offcanvas.Title>
                     </Offcanvas.Header>
+                    
                     <Offcanvas.Body>
                         <SideBar />
                     </Offcanvas.Body>
                 </Offcanvas>
+
             </div>
             <div className='col text-end d-none d-md-block p-0 '>
                 <Header />

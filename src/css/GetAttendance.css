@@ -1,0 +1,20 @@
+.search
+{
+    position: absolute;
+    right: 35px;
+    top: 10px;
+}
+.searchbar 
+{
+  outline-color:white;
+}
+
+td {
+    height: 50px;
+    vertical-align: bottom;
+  }
+
+.absent{
+    background-color: #ec3c10;
+    color: aliceblue;
+  }

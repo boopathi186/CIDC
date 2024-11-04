@@ -113,37 +113,7 @@ const GetUsers = () => {
                                         ))}
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    {records.length > 0 ? (
-                                        records.map((user, index) => (
-                                            <tr key={user.id} className="border-bottom">
-                                                <td className="text-center text-secondary">{firstIndex + index + 1}</td>
-                                                <td className="text-center">
-                                                    <Link className="text-decoration-none text-secondary" to={`/userProfile/${user.id}`}>
-                                                        {user.name}
-                                                    </Link>
-                                                </td>
-                                                <td className="text-center">{user.department}</td>
-                                                <td className="text-center">{user.roll}</td>
-                                                <td className="text-center">{user.is_active}</td>
-                                                <td className="text-center">
-                                                    <Button onClick={() => handleDelete(user.id)} variant="none px-sm-1 px-0">
-                                                        <i className="bi bi-trash3-fill text-danger px-1"></i>
-                                                    </Button>
-                                                    <Link to={`/userProfile/update/${user.id}`} className="px-1">
-                                                        <i className="edit bi bi-pencil-square"></i>
-                                                    </Link>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    ) : (
-                                        <tr>
-                                            <td colSpan={6} className="text-center text-danger">
-                                                No matches found
-                                            </td>
-                                        </tr>
-                                    )}
-                                </tbody>
+                               
                             </Table>
                             <Pagination pageCount={TotalPages} onPageChange={handlePageClick} />
                         </div>
@@ -155,3 +125,4 @@ const GetUsers = () => {
 };
 
 export default GetUsers;
+

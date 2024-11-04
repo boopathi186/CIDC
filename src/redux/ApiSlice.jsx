@@ -55,7 +55,9 @@ export const productsApi = createApi({
                 url: `attendance/id/${id}`,
                 method: 'DELETE',
             }),
-        }),
+        }), 
+            
+         
     }),
 });
 
