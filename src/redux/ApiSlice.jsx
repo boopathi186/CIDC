@@ -4,7 +4,7 @@ export const productsApi = createApi({
     reducerPath: 'productsApi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://localhost:8080',
-        prepareHeaders: (headers, {}) => {
+        prepareHeaders: (headers) => {
            
             const token = sessionStorage.getItem('token');
             if (token) {
@@ -45,7 +45,7 @@ export const productsApi = createApi({
         }),
         postAttendance: builder.mutation({
             query: (attendanceData) => ({
-                url: '/addattendance',
+                url: 'attendance/addattendance',
                 method: 'POST',
                 body: attendanceData,
             }),
@@ -56,15 +56,20 @@ export const productsApi = createApi({
                 method: 'DELETE',
             }),
         }), 
-            
-         
+        getPresent: builder.query({
+            query: () => `attendance/present`,
+        }),   
+        getLeave: builder.query({
+            query: () => `attendance/leave`,
+        }), 
+        getAbsent: builder.query({
+            query: () => `attendance/absent`,
+        }),     
     }),
 });
 
 export const {
-    useGetUsersQuery,
-    useGetUserByIdQuery,
-    useDeleteUserMutation,
-    useCreateUserMutation,
-    useUpdateUserMutation,useGetAttendanceQuery,usePostAttendanceMutation,useDeleteAttendanceMutation
+    useGetUsersQuery, useGetUserByIdQuery,useDeleteUserMutation,useCreateUserMutation,
+    useUpdateUserMutation,useGetAttendanceQuery,usePostAttendanceMutation,useDeleteAttendanceMutation,
+    useGetPresentQuery,useGetLeaveQuery,useGetAbsentQuery
 } = productsApi;

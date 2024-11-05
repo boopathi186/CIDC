@@ -18,3 +18,14 @@ td {
     background-color: #ec3c10;
     color: aliceblue;
   }
+  .sticky-top {
+    z-index: 1030;
+}
+@media (min-width: 992px) {
+  .toggle {
+    width: 99%;
+    display: flex;
+    margin-left: 0.8%;
+    border-radius: 10px;
+  }
+}

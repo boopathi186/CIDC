@@ -12,13 +12,13 @@ const SideBar = () => {
     ];
 
     return (
-        <div className="sidebar bg-white m-0 p-0">
+        <div className="sidebar bg-white m-0 p-0 sidebar-animation">
             <div className="nav flex-column shadow rounded-2">
                 {navItems.map((item, index) => (
                     <Link
                         key={index}
                         to={item.path}
-                        className={`navbars  nav-link mt-4 text-primary fw-semibold d-flex align-items-center justify-content-center fs-3 ${
+                        className={`navbars  nav-link mt-3 text-primary fw-semibold d-flex align-items-center justify-content-center fs-3 ${
                             activeIndex === index ? 'active border-right' : ''
                         }`}
                         onClick={() => setActiveIndex(index)}

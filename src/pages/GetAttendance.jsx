@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDeleteAttendanceMutation, useGetAttendanceQuery } from '../redux/ApiSlice';
 import Header from '../components/header/Header';
 import SideBar from './SideBar';
-import { Col, Pagination, Row, Spinner } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import Toggle from '../components/header/Toggle';
 import AttendanceTable from './AttendanceTable';
+import PaginationComponent from '../components/pagination/Pagination'; // Import the new Pagination component
 import '../css/GetAttendance.css';
 import Swal from 'sweetalert2';
 
@@ -13,7 +14,7 @@ const GetAttendance = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [filteredData, setFilteredData] = useState([]);
 
-    const recordsPerPage = 5;
+    const recordsPerPage = 10;
     const firstIndex = currentPage * recordsPerPage;
     const lastIndex = firstIndex + recordsPerPage;
 
@@ -26,6 +27,8 @@ const GetAttendance = () => {
             setFilteredData(data);
         }
     }, [data, refetch]);
+    data && console.log(data);
+    
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -48,18 +51,18 @@ const GetAttendance = () => {
         const value = event.target.value;
         setSearchTerm(value);
         if (data) {
-            const filtered = data.filter((attendance) =>
-                attendance.attendance_id.includes(value) ||
-                attendance.status.toLowerCase().includes(value.toLowerCase())
-            );
+            const filtered = data.filter((attendance) => (
+                (attendance.user && attendance.user.name && attendance.user.name.toLowerCase().includes(value)) ||
+                (attendance.attendanceId && attendance.attendanceId.toString().includes(value)) ||
+                (attendance.user && attendance.user.status && attendance.user.status.toLowerCase().includes(value))
+            ));
             setFilteredData(filtered);
             setCurrentPage(0);
         }
     };
 
     const handlePageClick = (selected) => {
-        const selectedPage = selected;
-        setCurrentPage(selectedPage);
+        setCurrentPage(selected.selected);
     };
 
     const records = filteredData && filteredData.length > 0 ? filteredData.slice(firstIndex, lastIndex) : [];
@@ -69,31 +72,65 @@ const GetAttendance = () => {
         <div>
             <Row className="p-0 m-0 mt-2 ">
                 <Col className='col-12 mt-2 shadow-sm '>
-                    <Col lg={12} className="border-bottom border-secondary border-opacity-25 text-end p-0 m-0 d-none d-lg-block ">
+                <Col lg={12} className="toggle border-bottom border-secondary shadow border-opacity-25 text-end p-0 bg-white text-white d-none d-lg-block">
                         <Header />
                     </Col>
-                    <Col className="d-lg-none p-0 m-0">
+                    <Col sm={12} className=" d-lg-none d-block p-0 m-0">
                         <Toggle />
                     </Col>
                 </Col>
             </Row>
 
-            <Row className="mt-5 mx-1 justify-content-center">
+            {/* Sidebar */}
+            <Row className="mt-5 mx-1 justify-content-center m-0 p-0">
                 <Col lg={1} className="d-none d-lg-block">
                     <SideBar />
                 </Col>
-                <Col lg={11} className="p-0">
-                    <AttendanceTable
-                        records={records}
-                        handleDelete={handleDelete}
-                        firstIndex={firstIndex}
-                        searchTerm={searchTerm}
-                        handleSearch={handleSearch}
-                        isLoading={isLoading}
-                    />
+
+                {/* Table */}
+
+                <Col lg={11} className="p-0 m-0 ">
+
+                    <Row className='p-0 mx-2 mb-3'>
+                        <Col lg={6} className='p-0 m-0 d-flex align-items-center fs-5  text-primary'>
+                            Attendance Overview
+                        </Col>
+
+                        <Col lg={6} className='p-0 m-0 '>
+                            <div className="w-100 position-relative">
+                                <i className="search bi bi-search text-secondary fs-3"></i>
+                                <input
+                                    className='searchbar w-100 ps-5 border border-light shadow-sm rounded-4 p-3'
+                                    onChange={handleSearch}
+                                    type="text"
+                                    value={searchTerm}
+                                    placeholder="Search for names..."
+                                    title="Type in a name"
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                    <Row className='p-0 m-0 mx-2'>
+                        <Col className="p-0 m-0">
+                            <AttendanceTable
+                                records={records}
+                                handleDelete={handleDelete}
+                                firstIndex={firstIndex}
+                                searchTerm={searchTerm}
+                                handleSearch={handleSearch}
+                                isLoading={isLoading}
+                            />
+                        </Col>
+                    </Row>
+
                 </Col>
-                <Col lg={11} className="d-flex justify-content-end mt-3 mb-3">
-                    <Pagination pageCount={TotalPages} handlePageClick={handlePageClick} />
+
+                {/* Pagination */}
+                <Col lg={11} className="d-flex justify-content-center mt-3 mb-3">
+                    <PaginationComponent
+                        pageCount={TotalPages}
+                        handlePageClick={handlePageClick}
+                    />
                 </Col>
             </Row>
         </div>

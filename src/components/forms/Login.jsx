@@ -69,7 +69,7 @@ const Login = () => {
         <Row className="body row-cols-lg-2 m-0 vh-100">
             <Col lg={6} className="p-0 d-lg-block d-none text-center d-flex justify-content-center align-items-center">
                 <div className="d-flex text-white justify-content-center align-items-center vh-100">
-                    <h2 className='m-0 '>Welcome to the Login Page</h2>
+                    <h2  className='m-0 fs-1 '>Welcome to the Login Page</h2>
                 </div>
             </Col>
             <Col lg={6} sm={12} className="d-flex justify-content-center align-items-center">

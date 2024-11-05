@@ -1,33 +1,31 @@
+// PaginationComponent.js
+
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Paginate = ({ pageCount,handlePageClick }) => {
-  return (
-    <div>
-      <ReactPaginate
-        breakLabel="..."
-        breakClassName='text-danger fw-bold mt-2 d-none d-md-inline-block'
-        nextLabel="Next"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={6}
-        pageCount={pageCount} // Adjusted here
-
-        previousLabel="Prev"
-        renderOnZeroPageCount={null}
-        containerClassName='pagination  justify-content-md-center justify-content-between'
-        pageClassName='page-item '
-        pageLinkClassName='page-link text-danger border-0 rounded-2 m-1 shadow-sm d-md-block d-none'
-        previousLinkClassName='page-link text-danger border-white rounded-3 fw-bold shadow bg-light mx-2'
-        previousClassName='page-item text-danger'
-        nextClassName='page-item text-danger'
-        nextLinkClassName='page-link text-danger border-white rounded-3 fw-bold shadow bg-light mx-2'
-        activeClassName='active'
-        activeLinkClassName='page-link bg-info bg-opacity-75 text-white text-primary border-0 shadow-none'
-      />
-    </div>
-  );
+const PaginationComponent = ({ pageCount, handlePageClick }) => {
+    return (
+        <ReactPaginate
+            previousLabel={'Previous'}
+            nextLabel={'Next'}
+            breakLabel={'...'}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageClick}
+            containerClassName={'pagination'}
+            pageClassName={'page-item'}
+            pageLinkClassName={'page-link'}
+            previousClassName={'page-item'}
+            previousLinkClassName={'page-link'}
+            nextClassName={'page-item'}
+            nextLinkClassName={'page-link'}
+            breakClassName={'page-item'}
+            breakLinkClassName={'page-link'}
+            activeClassName={'active'}
+        />
+    );
 };
 
-
-export default Paginate;
+export default PaginationComponent;
