@@ -32,7 +32,7 @@ const Header = (props) => {
     }
 
     return (
-        <div className=' header d-flex justify-content-end align-items-center shadow-sm rounded p-2 mx-3'>
+        <div className=' header d-flex justify-content-end align-items-center  rounded p-2 mx-3'>
              <div className='col-2 text-start'>
                 <img src={logo} alt="logo" height="50" className='w-25 ' />
              </div>

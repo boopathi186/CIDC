@@ -59,17 +59,28 @@ export const productsApi = createApi({
         getPresent: builder.query({
             query: () => `attendance/present`,
         }),   
-        getLeave: builder.query({
-            query: () => `attendance/leave`,
-        }), 
         getAbsent: builder.query({
             query: () => `attendance/absent`,
-        }),     
+        }),   
+        getLeaveRecord: builder.query({
+            query: () => 'leaverecord',
+        }),  
+        getLeaveRecordById: builder.query({
+            query: (id) => `leaverecord/id/${id}`,
+        }),
+        getSickLeave: builder.query({
+            query: () => 'attendance/sick',
+        }),  
+        getPlannedLeave: builder.query({
+            query: () => 'attendance/planned-leave',
+        }),
+    
     }),
 });
 
 export const {
     useGetUsersQuery, useGetUserByIdQuery,useDeleteUserMutation,useCreateUserMutation,
     useUpdateUserMutation,useGetAttendanceQuery,usePostAttendanceMutation,useDeleteAttendanceMutation,
-    useGetPresentQuery,useGetLeaveQuery,useGetAbsentQuery
+    useGetPresentQuery,useGetLeaveQuery,useGetAbsentQuery,useGetLeaveRecordQuery,useGetLeaveRecordByIdQuery,
+    useGetSickLeaveQuery,useGetPlannedLeaveQuery
 } = productsApi;

@@ -11,7 +11,7 @@ const Toggle = () => {
     const handleShow = () => setShow(true);
 
     return (
-        <div className='mx-md-4 p-1 mx-3  rounded-3 row m-0 p-0 shadow-sm bg-white '>
+        <div className='mx-lg-4 mx-3 p-1   rounded-3 row m-0 p-0 shadow-sm bg-white '>
 
             <div className='col-2 d-lg-none p-0 m-0'>
                 <Button variant="white" onClick={handleShow}>

@@ -35,13 +35,13 @@ const AttendanceTable = ({ records, handleDelete, firstIndex, searchTerm, handle
                                                     <Link className="text-decoration-none text-secondary" to={`/userProfile/${user.attendanceId}`}>
                                                         {user.user.name}
                                                     </Link>
-                                                </td>
+                                                </td>   
                                                 <td className="text-center text-secondary">{user.user.userId}</td>
                                                 <td className="text-center text-secondary">{user.date}</td>
                                                 <td className="text-center text-secondary">{(user.user.record_in) === "-" ? "-" : user.recordIn}</td>
                                                 <td className="text-center text-secondary">{(user.user.record_out) === "-" ? "-" : user.recordOut}</td>
                                                 <td className="text-center">
-                                                    {(user.status) === "absent" ? "A" : (user.status === "leave" ? "L" : "P")}
+                                                    {(user.status) === "absent" || (user.status) === "Sick Leave" || (user.status) === "Planned Leave" ? "A" : (user.status === "leave" ? "L" : "P")}
                                                 </td>
                                                 <td className="text-center text-secondary">{(user.user.record_in === "-" || user.user.record_out === "-") ? "0" : "8"}</td>
                                                 {/* <td className="text-center text-secondary">{(user.user.record_in === "-" || user.user.record_out === "-" )? "-" : "8"}</td> */}

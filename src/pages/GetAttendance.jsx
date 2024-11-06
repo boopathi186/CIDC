@@ -14,7 +14,7 @@ const GetAttendance = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [filteredData, setFilteredData] = useState([]);
 
-    const recordsPerPage = 10;
+    const recordsPerPage = 8;
     const firstIndex = currentPage * recordsPerPage;
     const lastIndex = firstIndex + recordsPerPage;
 
@@ -28,7 +28,7 @@ const GetAttendance = () => {
         }
     }, [data, refetch]);
     data && console.log(data);
-    
+
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -70,9 +70,9 @@ const GetAttendance = () => {
 
     return (
         <div>
-            <Row className="p-0 m-0 mt-2 ">
-                <Col className='col-12 mt-2 shadow-sm '>
-                <Col lg={12} className="toggle border-bottom border-secondary shadow border-opacity-25 text-end p-0 bg-white text-white d-none d-lg-block">
+            <Row className="  header-container p-0 m-0 mt-2 ">
+                <Col className='col-12 mt-2 '>
+                    <Col lg={12} className="toggle border-bottom border-secondary shadow border-opacity-25 text-end p-0 bg-white text-white d-none d-lg-block ">
                         <Header />
                     </Col>
                     <Col sm={12} className=" d-lg-none d-block p-0 m-0">
@@ -82,57 +82,59 @@ const GetAttendance = () => {
             </Row>
 
             {/* Sidebar */}
-            <Row className="mt-5 mx-1 justify-content-center m-0 p-0">
-                <Col lg={1} className="d-none d-lg-block">
-                    <SideBar />
-                </Col>
+            <div className="dashboard-scrollable">
+                <Row className="mt-5 mx-1 justify-content-center m-0 p-0">
+                    <Col lg={1} className="d-none d-lg-block">
+                        <SideBar />
+                    </Col>
 
-                {/* Table */}
+                    {/* Table */}
 
-                <Col lg={11} className="p-0 m-0 ">
+                    <Col lg={11} className="p-0 m-0 ">
 
-                    <Row className='p-0 mx-2 mb-3'>
-                        <Col lg={6} className='p-0 m-0 d-flex align-items-center fs-5  text-primary'>
-                            Attendance Overview
-                        </Col>
+                        <Row className='p-0 mx-2 mb-3'>
+                            <Col lg={6} className='p-0 m-0 d-flex align-items-center justify-content-lg-start justify-content-center fs-lg-5 mb-lg-0 mb-3 fs-1 text-primary'>
+                                Attendance Overview
+                            </Col>
 
-                        <Col lg={6} className='p-0 m-0 '>
-                            <div className="w-100 position-relative">
-                                <i className="search bi bi-search text-secondary fs-3"></i>
-                                <input
-                                    className='searchbar w-100 ps-5 border border-light shadow-sm rounded-4 p-3'
-                                    onChange={handleSearch}
-                                    type="text"
-                                    value={searchTerm}
-                                    placeholder="Search for names..."
-                                    title="Type in a name"
+                            <Col lg={6} className='p-0 m-0 '>
+                                <div className="w-100 position-relative">
+                                    <i className="search bi bi-search text-secondary fs-3"></i>
+                                    <input
+                                        className='searchbar w-100 ps-5 border border-light shadow-sm rounded-4 p-3'
+                                        onChange={handleSearch}
+                                        type="text"
+                                        value={searchTerm}
+                                        placeholder="Search for names..."
+                                        title="Type in a name"
+                                    />
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row className='p-0 m-0 mx-2'>
+                            <Col className="p-0 m-0">
+                                <AttendanceTable
+                                    records={records}
+                                    handleDelete={handleDelete}
+                                    firstIndex={firstIndex}
+                                    searchTerm={searchTerm}
+                                    handleSearch={handleSearch}
+                                    isLoading={isLoading}
                                 />
-                            </div>
-                        </Col>
-                    </Row>
-                    <Row className='p-0 m-0 mx-2'>
-                        <Col className="p-0 m-0">
-                            <AttendanceTable
-                                records={records}
-                                handleDelete={handleDelete}
-                                firstIndex={firstIndex}
-                                searchTerm={searchTerm}
-                                handleSearch={handleSearch}
-                                isLoading={isLoading}
-                            />
-                        </Col>
-                    </Row>
+                            </Col>
+                        </Row>
 
-                </Col>
+                    </Col>
 
-                {/* Pagination */}
-                <Col lg={11} className="d-flex justify-content-center mt-3 mb-3">
-                    <PaginationComponent
-                        pageCount={TotalPages}
-                        handlePageClick={handlePageClick}
-                    />
-                </Col>
-            </Row>
+                    {/* Pagination */}
+                    <Col lg={11} className="d-flex justify-content-center mt-3 mb-3">
+                        <PaginationComponent
+                            pageCount={TotalPages}
+                            handlePageClick={handlePageClick}
+                        />
+                    </Col>
+                </Row>
+            </div>
         </div>
     );
 };
