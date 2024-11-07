@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDeleteAttendanceMutation, useGetAttendanceQuery } from '../redux/ApiSlice';
-import Header from '../components/header/Header';
-import SideBar from './SideBar';
+
 import { Col, Row } from 'react-bootstrap';
-import Toggle from '../components/header/Toggle';
-import AttendanceTable from './AttendanceTable';
-import PaginationComponent from '../components/pagination/Pagination'; // Import the new Pagination component
+
+import AttendanceTable from '../components/table/AttendanceTable';
+import PaginationComponent from '../components/pagination/Pagination';
 import '../css/GetAttendance.css';
 import Swal from 'sweetalert2';
 
@@ -14,7 +13,7 @@ const GetAttendance = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [filteredData, setFilteredData] = useState([]);
 
-    const recordsPerPage = 8;
+    const recordsPerPage = 10;
     const firstIndex = currentPage * recordsPerPage;
     const lastIndex = firstIndex + recordsPerPage;
 
@@ -26,7 +25,7 @@ const GetAttendance = () => {
         if (data) {
             setFilteredData(data);
         }
-    }, [data, refetch]);
+    }, [data]);
     data && console.log(data);
 
 
@@ -70,27 +69,12 @@ const GetAttendance = () => {
 
     return (
         <div>
-            <Row className="  header-container p-0 m-0 mt-2 ">
-                <Col className='col-12 mt-2 '>
-                    <Col lg={12} className="toggle border-bottom border-secondary shadow border-opacity-25 text-end p-0 bg-white text-white d-none d-lg-block ">
-                        <Header />
-                    </Col>
-                    <Col sm={12} className=" d-lg-none d-block p-0 m-0">
-                        <Toggle />
-                    </Col>
-                </Col>
-            </Row>
 
-            {/* Sidebar */}
-            <div className="dashboard-scrollable">
-                <Row className="mt-5 mx-1 justify-content-center m-0 p-0">
-                    <Col lg={1} className="d-none d-lg-block">
-                        <SideBar />
-                    </Col>
+            <div className="">
+                <Row className="mx-1 justify-content-center m-0 p-0">
+                
 
-                    {/* Table */}
-
-                    <Col lg={11} className="p-0 m-0 ">
+                    <Col lg={12} className="p-0 m-0 ">
 
                         <Row className='p-0 mx-2 mb-3'>
                             <Col lg={6} className='p-0 m-0 d-flex align-items-center justify-content-lg-start justify-content-center fs-lg-5 mb-lg-0 mb-3 fs-1 text-primary'>
@@ -98,10 +82,10 @@ const GetAttendance = () => {
                             </Col>
 
                             <Col lg={6} className='p-0 m-0 '>
-                                <div className="w-100 position-relative">
-                                    <i className="search bi bi-search text-secondary fs-3"></i>
+                                <div className="w-100 position-relative text-end ">
+                                    <i className="search bi bi-search text-secondary fs-3 position-absolute top-50 translate-middle-y"></i>
                                     <input
-                                        className='searchbar w-100 ps-5 border border-light shadow-sm rounded-4 p-3'
+                                        className='searchbar  ps-5 border border-light shadow-sm rounded-4 p-3 '
                                         onChange={handleSearch}
                                         type="text"
                                         value={searchTerm}
@@ -112,7 +96,7 @@ const GetAttendance = () => {
                             </Col>
                         </Row>
                         <Row className='p-0 m-0 mx-2'>
-                            <Col className="p-0 m-0">
+                            <Col className=" p-0 m-0">
                                 <AttendanceTable
                                     records={records}
                                     handleDelete={handleDelete}

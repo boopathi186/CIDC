@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../css/Sidebar.css';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import '../../css/Sidebar.css';
 
 const SideBar = () => {
     const [activeIndex, setActiveIndex] = useState(0);
+    const location = useLocation();
 
     const navItems = [
         { icon: 'bi-columns-gap', label: 'Dashboard', path: '/dashboard' },
-        { icon: 'bi-chat-left-dots', label: 'Chat', path: '/chat' },
+        { icon: 'bi-chat-left-dots', label: 'Chat', path: '/leavechart' },
         { icon: 'bi-clock-history', label: 'Attendance', path: '/attendance' },
     ];
+
+    useEffect(() => {
+        const currentIndex = navItems.findIndex(item => item.path === location.pathname);
+        if (currentIndex !== -1) {
+            setActiveIndex(currentIndex);
+        }
+    }, [location.pathname]);
 
     return (
         <div className="sidebar sidebar-animation p-0">

@@ -3,7 +3,7 @@ import React from 'react';
 import '../css/DashBoard.css';
 import { Row, Col } from 'react-bootstrap';
 import Header from '../components/header/Header';
-import SideBar from '../pages/SideBar';
+import SideBar from '../components/sidebar/SideBar.jsx';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import Toggle from '../components/header/Toggle';
@@ -14,6 +14,7 @@ import LeaveChart from '../components/charts/LeaveChart';
 import SickLeave from './SickLeave';
 import PlannedLeave from './PlannedLeave';
 import UnPlannedLeave from './UnPlannedLeave.jsx';
+import GetAttendance from './GetAttendance.jsx';
 
 
 const Dashboard = () => {
@@ -73,9 +74,12 @@ const Dashboard = () => {
                                         <h4 className="text-secondary text-opacity-50 mt-1 fs-6">{moment().format('LTS')}</h4>
                                         <h4 className="text-secondary text-opacity-50 text-center mb-4 ms-2">{moment().format("MMM Do YY")}</h4>
                                     </Row>
-                                    <Link to="/attendance" className="text-decoration-none">
-                                        <button className="btn btn-primary mb-2">View Attendance</button>
-                                    </Link>
+                                    <button 
+                                        className="btn btn-primary mb-2 m-0  mx-2 " 
+                                        onClick={() => document.getElementById('get-attendance').scrollIntoView({ behavior: 'smooth' })}
+                                    >
+                                        View Attendance
+                                    </button>
                                 </div>
                             </Col>
 
@@ -100,10 +104,13 @@ const Dashboard = () => {
                             </Col>
                         </Row>
 
-                        <Row className="mt-2 mx-2">
-                            <Col lg={6} className='mt-2 px-0'>
-                                <LeaveChart chartData={chartData} />
+                        <Row id="get-attendance" className="mt-2 mx-2">
+                            <Col lg={12} className='mt-2 px-0'>
+                                <GetAttendance/>
                             </Col>
+                            {/* <Col lg={4} className='mt-2 px-0'>
+                                <LeaveChart chartData={chartData} />
+                            </Col> */}
                         </Row>
                     </Col>
                 </Row>

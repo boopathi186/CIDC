@@ -43,6 +43,22 @@ export const productsApi = createApi({
         getAttendance: builder.query({
             query: () => 'attendance',
         }),
+        getAttendanceById: builder.query({
+            query: (id) => `attendance/id/${id}`,
+        }),
+        updateAttendance: builder.mutation({
+            query: ({ id, ...data }) => ({
+                url: `/attendance/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+        }),
+        getDeleteAttendance: builder.mutation({
+            query: (id) => ({
+                url: `attendance/id/${id}`,
+                method: 'DELETE',
+            }),
+        }),
         postAttendance: builder.mutation({
             query: (attendanceData) => ({
                 url: 'attendance/addattendance',
@@ -81,6 +97,7 @@ export const productsApi = createApi({
 export const {
     useGetUsersQuery, useGetUserByIdQuery,useDeleteUserMutation,useCreateUserMutation,
     useUpdateUserMutation,useGetAttendanceQuery,usePostAttendanceMutation,useDeleteAttendanceMutation,
-    useGetPresentQuery,useGetLeaveQuery,useGetAbsentQuery,useGetLeaveRecordQuery,useGetLeaveRecordByIdQuery,
-    useGetSickLeaveQuery,useGetPlannedLeaveQuery
+    useGetPresentQuery,useGetAbsentQuery,useGetLeaveRecordQuery,useGetLeaveRecordByIdQuery,
+    useGetSickLeaveQuery,useGetPlannedLeaveQuery,useGetAttendanceByIdQuery,useUpdateAttendanceMutation,
+    useGetDeleteAttendanceMutation
 } = productsApi;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDeleteUserMutation, UseDeleteUserMutation, useGetUsersQuery } from '../redux/ApiSlice';
 import Header from '../components/header/Header';
-import SideBar from './SideBar';
+import SideBar from '../components/sidebar/SideBar';
 import { Button, Col, Pagination, Row, Spinner, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../css/GetUsers.css'

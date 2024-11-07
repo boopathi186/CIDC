@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Offcanvas } from 'react-bootstrap';
 import { BsList } from 'react-icons/bs';
-import SideBar from '../../pages/SideBar';
+import SideBar from '../sidebar/SideBar';
 import Header from './Header';
 import logo from '../../assets/logo.png';
 
