@@ -9,6 +9,7 @@ import PrivateRoute, { PrivateRoutes } from './components/private-Router/Private
 import GetUsers from './pages/GetUsers';
 import GetAttendance from './pages/GetAttendance';
 import LeavePage from './pages/LeavePage';
+import PostAttendance from './pages/PostAttendance';
 
 
 
@@ -24,9 +25,9 @@ function App() {
           </>
           <Route element={<PrivateRoute />}>
             <Route path='/dashboard' element={<DashBoard />} />
-            <Route path='/attendance'  element={<GetAttendance/>}/>
-            <Route path='/users'  element={<GetUsers/>}/>
+            <Route path='/user'  element={<GetUsers/>}/>
             <Route path='/leavechart'  element={<LeavePage/>}/>
+            <Route path='/attendance'  element={<PostAttendance/>}/>
             <Route path='*' element={<NotFound />} />
           </Route>
 

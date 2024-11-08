@@ -10,7 +10,6 @@ import Toggle from '../components/header/Toggle';
 import TotalEmployees from './TotalEmployees';
 import Presents from './Presents';
 import Absents from './Absents';
-import LeaveChart from '../components/charts/LeaveChart';
 import SickLeave from './SickLeave';
 import PlannedLeave from './PlannedLeave';
 import UnPlannedLeave from './UnPlannedLeave.jsx';

@@ -1,0 +1,19 @@
+.active{
+    background-color: rgb(161, 226, 226);
+}
+.table-container {
+    max-height: 500px; /* Set your preferred height */
+    overflow-y: auto; /* Enables vertical scroll */
+}
+
+.table-header th,
+.table-data td {
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+.table-container .table-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white; /* Keeps header visible while scrolling */
+}

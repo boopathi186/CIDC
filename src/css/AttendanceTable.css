@@ -3,3 +3,6 @@
     border-bottom: #82c0f3;   
 }
 
+.table-responsive{
+    overflow-x: auto;
+}

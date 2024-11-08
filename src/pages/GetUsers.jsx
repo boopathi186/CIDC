@@ -1,125 +1,133 @@
 import React, { useEffect, useState } from 'react';
-import { useDeleteUserMutation, UseDeleteUserMutation, useGetUsersQuery } from '../redux/ApiSlice';
+import {  useGetUsersQuery } from '../redux/ApiSlice';
 import Header from '../components/header/Header';
 import SideBar from '../components/sidebar/SideBar';
-import { Button, Col, Pagination, Row, Spinner, Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Row, Col} from 'react-bootstrap';
 import '../css/GetUsers.css'
-import Swal from 'sweetalert2';
+import PaginationComponent from '../components/pagination/Pagination';
+import UserTable from '../components/table/Usertable';
+import Toggle from '../components/header/Toggle';
+import AddUser from '../components/modals/AddUser';
 
 const GetUsers = () => {
+
+ 
+
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const [filteredData, setFilteredData] = useState([]);
+ 
 
     const recordsPerPage = 10;
     const firstIndex = currentPage * recordsPerPage;
     const lastIndex = firstIndex + recordsPerPage;
 
- 
-    const records = filteredData && filteredData.length > 0 ? filteredData.slice(firstIndex, lastIndex) : [];
-    const TotalPages = Math.ceil((filteredData ? filteredData.length : 0) / recordsPerPage);
-
     const { data, isLoading, refetch } = useGetUsersQuery([]);
-    const [deleteUser] = useDeleteUserMutation();
 
     useEffect(() => {
         refetch();
         if (data) {
             setFilteredData(data);
-            console.log(data);
         }
     }, [data, refetch]);
+    data && console.log(data);
 
-    const handleDelete = (id) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                deleteUser(id);
-                setFilteredData(filteredData.filter((user) => user.id !== id));
-                Swal.fire("Deleted!", "User has been deleted.", "success");
-            }
-        });
+    const [filteredData, setFilteredData] = useState([]);
+
+    const onDeleteUser = (userId) => {
+      setFilteredData((prevData) => prevData.filter((user) => user.userId !== userId));
     };
+   
 
     const handleSearch = (event) => {
         const value = event.target.value;
         setSearchTerm(value);
         if (data) {
-            const filtered = data.filter((user) =>
-                user.id.includes(value) ||
-                user.userName.toLowerCase().includes(value.toLowerCase()) ||
-                user.roll.toString().includes(value)
-            );
+            const filtered = data.filter((attendance) => (
+                (attendance.user && attendance.user.name && attendance.user.name.toLowerCase().includes(value)) ||
+                (attendance.attendanceId && attendance.attendanceId.toString().includes(value)) ||
+                (attendance.user && attendance.user.status && attendance.user.status.toLowerCase().includes(value))
+            ));
             setFilteredData(filtered);
             setCurrentPage(0);
         }
     };
 
-    const handlePageClick = (event) => {
-        const selectedPage = event.selected;
-        setCurrentPage(selectedPage);
+    const handlePageClick = (selected) => {
+        setCurrentPage(selected.selected);
     };
+
+    const records = filteredData && filteredData.length > 0 ? filteredData.slice(firstIndex, lastIndex) : [];
+    const TotalPages = Math.ceil((filteredData ? filteredData.length : 0) / recordsPerPage);
 
     return (
         <div>
-            {isLoading ? (
-                <h4 className="d-flex text-danger mt-5 justify-content-center align-items-center vh-100">
-                    <Spinner animation="border" />
-                </h4>
-            ) : (
-                <Row className="m-0 p-0">
-                    <Col lg={2} className="p-0 m-0 vh-100 shadow d-lg-block d-none">
+
+            <Row className=" header-container p-0 m-0 mt-2">
+                <Col className='col-12 mt-2 p-0 sticky-top'>
+                    <Col lg={12} className="header border-bottom border-secondary shadow border-opacity-25 text-end p-0 bg-white d-none d-lg-block">
+                        <Header />
+                    </Col>
+                    <Col sm={12} className="d-lg-none d-block p-0 m-0">
+                        <Toggle />
+                    </Col>
+                </Col>
+            </Row>
+            <div className="dashboard-scrollable">
+                <Row className="mt-4 mx-2">
+                    <Col lg={1} className="d-none d-lg-block rounded-3">
                         <SideBar />
                     </Col>
-                    <Col lg={10} className="p-0 m-0">
-                        <Row className="border-bottom border-secondary border-opacity-25 text-end p-0 m-0">
-                            <Header />
-                        </Row>
-                        <div className="text-end container-fluid">
-                            <Row className="mt-3">
-                                <Col md={6}>
-                                    <div className="w-100 p-3 position-relative">
-                                        <i className="search bi bi-search text-secondary fs-3"></i>
-                                        <input
-                                            className="searchbar w-100 ps-5 shadow-sm rounded-4 border-0 p-3"
-                                            onChange={handleSearch}
-                                            type="text"
-                                            value={searchTerm}
-                                            placeholder="Search for names..."
-                                            title="Type in a name"
-                                        />
-                                    </div>
+
+                    <Col lg={11} className=" p-0 ">
+                        <Col />
+                        <div className="">
+                            <Row className="mx-1 justify-content-center m-0 p-0">
+                                <Col lg={12} className="p-0 m-0 ">
+                                    <Row className='p-0 mx-2 mb-3'>
+                        
+                                        <Col lg={6} className='p-0 m-0 '>
+                                            <div className="w-100 position-relative text-end ">
+                                                <i className="search bi bi-search text-secondary fs-3 position-absolute top-50 translate-middle-y"></i>
+                                                <input
+                                                    className='searchbar  ps-5 border border-light shadow-sm rounded-4 p-3 '
+                                                    onChange={handleSearch}
+                                                    type="text"
+                                                    value={searchTerm}
+                                                    placeholder="Search for names..."
+                                                    title="Type in a name"
+                                                />
+                                            </div>
+                                        </Col>
+                                        <Col lg={6} className='p-0 m-0 d-flex align-items-center justify-content-lg-end justify-content-center fs-lg-5 mb-lg-0 mb-3 fs-1 text-primary'>
+                                           <AddUser/>
+                                            
+                                        </Col>
+                                    </Row>
+                                    <Row className='p-0 m-0 mx-2'>
+                                        <Col className=" p-0 m-0">
+                                            <UserTable
+                                                records={records}
+                                                firstIndex={firstIndex}
+                                                searchTerm={searchTerm}
+                                                handleSearch={handleSearch}
+                                                isLoading={isLoading}
+                                                onDeleteUser={onDeleteUser}
+                                            />
+                                        </Col>
+                                    </Row>
                                 </Col>
-                                <Col md={6} className="text-end">
-                                    <Link to="/userprofile/create">
-                                        <Button className="createButton border border-none shadow-sm mt-4 fw-semibold rounded-3 py-3" variant="none">
-                                            + Create Product
-                                        </Button>
-                                    </Link>
+                                {/* Pagination */}
+                                <Col lg={11} className="d-flex justify-content-center mt-3 mb-3">
+                                    <PaginationComponent
+                                        pageCount={TotalPages}
+                                        handlePageClick={handlePageClick}
+                                    />
                                 </Col>
                             </Row>
-                            <Table responsive bordered className="shadow mt-3">
-                                <thead className="sticky-top shadow-sm text-center">
-                                    <tr>
-                                        {['S.No', 'Users', 'Department', 'Roll', 'Status', 'Actions'].map((field) => (
-                                            <th key={field} className="text-danger bg-light fs-6 p-2">{field}</th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                               
-                            </Table>
-                            <Pagination pageCount={TotalPages} onPageChange={handlePageClick} />
                         </div>
                     </Col>
                 </Row>
-            )}
+            </div>
         </div>
     );
 };

@@ -18,24 +18,25 @@ export const productsApi = createApi({
             query: () => 'user',
         }),
         getUserById: builder.query({
-            query: (id) => `user/id/${id}`,
+            query: (userId) => `user/id/${userId}`,
         }),
         deleteUser: builder.mutation({
-            query: (id) => ({
-                url: `user/id/${id}`,
+            query: (userId) => ({
+                url: `user/id/${userId}`,
                 method: 'DELETE',
             }),
         }),
         createUser: builder.mutation({
             query: (userData) => ({
-                url: '/products',
+                url: 'user/adduser',
                 method: 'POST',
                 body: userData,
+                responseType: 'text',
             }),
         }),
         updateUser: builder.mutation({
-            query: ({ id, ...data }) => ({
-                url: `/user/${id}`,
+            query: ({ userId, ...data }) => ({
+                url: `/user/${userId}`,
                 method: 'PUT',
                 body: data,
             }),
@@ -44,18 +45,18 @@ export const productsApi = createApi({
             query: () => 'attendance',
         }),
         getAttendanceById: builder.query({
-            query: (id) => `attendance/id/${id}`,
+            query: (attendanceId) => `attendance/id/${attendanceId}`,
         }),
         updateAttendance: builder.mutation({
-            query: ({ id, ...data }) => ({
-                url: `/attendance/${id}`,
+            query: ({ attendanceId, ...data }) => ({
+                url: `/attendance/${attendanceId}`,
                 method: 'PUT',
                 body: data,
             }),
         }),
         getDeleteAttendance: builder.mutation({
-            query: (id) => ({
-                url: `attendance/id/${id}`,
+            query: (attendanceId) => ({
+                url: `attendance/id/${attendanceId}`,
                 method: 'DELETE',
             }),
         }),
@@ -67,8 +68,8 @@ export const productsApi = createApi({
             }),
         }),
         deleteAttendance: builder.mutation({
-            query: (id) => ({
-                url: `attendance/id/${id}`,
+            query: (attendanceId) => ({
+                url: `attendance/id/${attendanceId}`,
                 method: 'DELETE',
             }),
         }), 
@@ -82,7 +83,7 @@ export const productsApi = createApi({
             query: () => 'leaverecord',
         }),  
         getLeaveRecordById: builder.query({
-            query: (id) => `leaverecord/id/${id}`,
+            query: (leaveRecordId) => `leaverecord/id/${leaveRecordId}`,
         }),
         getSickLeave: builder.query({
             query: () => 'attendance/sick',
