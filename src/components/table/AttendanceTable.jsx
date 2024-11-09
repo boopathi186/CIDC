@@ -27,8 +27,8 @@ const AttendanceTable = ({ records, handleDelete, firstIndex, searchTerm, handle
                         <CardBody className='p-0 m-0'>
                             <Table bordered variant='border border-white' className="text-center">
                                 <thead className='sticky-top shadow-sm'>
-                                    <tr className='table-header'>
-                                        {['S.No', 'Name', 'UserId', 'Date', 'Record_In', 'Record_Out', 'Status', 'Working Hours', 'Actions'].map((field) => (
+                                    <tr className='table-header text-nowrap'>
+                                        {['S.No', 'Name', 'UserId', 'Date', 'Roll','Department', 'Record_In', 'Record_Out', 'Status', 'Working Hours', 'Actions'].map((field) => (
                                             <th key={field} className='text-info text-opacity-75  bg-opacity-100 rounded  fs-6 fw-semibold p-2'>{field}</th>
                                         ))}
                                     </tr>
@@ -45,6 +45,8 @@ const AttendanceTable = ({ records, handleDelete, firstIndex, searchTerm, handle
                                                 </td>   
                                                 <td className="text-center text-secondary text-nowrap">{user.user.userId}</td>
                                                 <td className="text-center text-secondary text-nowrap">{user.date}</td>
+                                                <td className="text-center text-secondary text-nowrap">{user.user.roll}</td>
+                                                <td className="text-center text-secondary text-nowrap">{user.user.department}</td>
                                                 <td className="text-center text-secondary text-nowrap">{(user.user.record_in) === "-" ? "-" : user.recordIn}</td>
                                                 <td className="text-center text-secondary text-nowrap">{(user.user.record_out) === "-" ? "-" : user.recordOut}</td>
                                                 <td className="text-center text-nowrap">

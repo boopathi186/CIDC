@@ -77,7 +77,7 @@ const GetAttendance = () => {
                     <Col lg={12} className="p-0 m-0 ">
 
                         <Row className='p-0 mx-2 mb-3'>
-                            <Col lg={6} className='p-0 m-0 d-flex align-items-center justify-content-lg-start justify-content-center fs-lg-5 mb-lg-0 mb-3 fs-1 text-primary'>
+                            <Col lg={6} className='p-0 m-0 d-flex align-items-center justify-content-lg-start justify-content-center  mb-lg-0 mb-3 fs-3 text-primary'>
                                 Attendance Overview
                             </Col>
 
@@ -96,7 +96,7 @@ const GetAttendance = () => {
                             </Col>
                         </Row>
                         <Row className='p-0 m-0 mx-2'>
-                            <Col className=" p-0 m-0">
+                            <Col className="p-0 m-0" style={{ maxHeight: '400px', overflowY: 'scroll', overflowX: 'scroll' }}>
                                 <AttendanceTable
                                     records={records}
                                     handleDelete={handleDelete}
@@ -111,12 +111,12 @@ const GetAttendance = () => {
                     </Col>
 
                     {/* Pagination */}
-                    <Col lg={11} className="d-flex justify-content-center mt-3 mb-3">
+                    {/* <Col lg={11} className="d-flex justify-content-center mt-3 mb-3">
                         <PaginationComponent
                             pageCount={TotalPages}
                             handlePageClick={handlePageClick}
                         />
-                    </Col>
+                    </Col> */}
                 </Row>
             </div>
         </div>

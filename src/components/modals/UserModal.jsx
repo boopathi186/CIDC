@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useGetUserByIdQuery, useDeleteUserMutation } from '../../redux/ApiSlice';
 import { Button, Modal, Spinner } from 'react-bootstrap';
 
-const UserModal = ({ show, handleClose, userId, onDelete }) => {
+const UserModal = ({ show, handleClose, userId}) => {
 
     const [user, setUser] = useState(null);
     const { data, isLoading, error } = useGetUserByIdQuery(userId);
@@ -15,26 +15,11 @@ const UserModal = ({ show, handleClose, userId, onDelete }) => {
         setUser(data);
       }
     }, [data, userId]);
-
-    const handleDelete = async () => {
-      try {
-          await deleteUser(userId).unwrap();
-          handleClose();
-      } catch (error) {
-          if (error.originalStatus === 200 && typeof error.data === 'string') {
-              console.warn("Non-JSON response:", error.data);
-              // Show error message to user or handle accordingly
-          } else {
-              console.error("Failed to delete the user: ", error);
-          }
-      }
-  };
-  
   
     return (
-      <Modal  size="sm" show={show} onHide={handleClose} backdrop={false} style={{backdropFilter: 'blur(2px)', border: '1px solid #0d6efd'}}>
+      <Modal  size="sm" show={show} onHide={handleClose} backdrop={false} centered style={{backdropFilter: 'blur(2px)', border: '1px solid #0d6efd'}}>
         <Modal.Header closeButton className="border-white ">
-          <Modal.Title className="text-primary">Attendance Details</Modal.Title>
+          <Modal.Title className="text-primary">User Details</Modal.Title>
         </Modal.Header>
         <Modal.Body className="px-4">
           {isLoading ? (
@@ -56,9 +41,6 @@ const UserModal = ({ show, handleClose, userId, onDelete }) => {
         <Modal.Footer className="border-white">
           <Button variant="light" className="shadow-sm" onClick={handleClose}>
             Close
-          </Button>
-          <Button onClick={handleDelete} variant="danger" className="shadow-sm">
-            Delete
           </Button>
         </Modal.Footer>
       </Modal>

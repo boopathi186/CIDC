@@ -1,4 +1,3 @@
-// Dashboard.js
 import React from 'react';
 import '../css/DashBoard.css';
 import { Row, Col } from 'react-bootstrap';
@@ -103,13 +102,11 @@ const Dashboard = () => {
                             </Col>
                         </Row>
 
-                        <Row id="get-attendance" className="mt-2 mx-2">
+                        <Row id="get-attendance" className="mt-2 mx-2 h-50">
                             <Col lg={12} className='mt-2 px-0'>
                                 <GetAttendance/>
                             </Col>
-                            {/* <Col lg={4} className='mt-2 px-0'>
-                                <LeaveChart chartData={chartData} />
-                            </Col> */}
+                    
                         </Row>
                     </Col>
                 </Row>

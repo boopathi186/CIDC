@@ -12,8 +12,13 @@ const AddUser = () => {
     });
     const [show, setShow] = useState(false);
     const [createUser] = useCreateUserMutation();
+    const[isAdding,setIsAdding] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+        setFormData({ name: '', userId: '', roll: '', department: '' });
+    };
+
     const handleShow = () => setShow(true);
 
     const handleChange = (e) => {
@@ -32,7 +37,7 @@ const AddUser = () => {
         createUser(formData)
             .unwrap()
             .then(() => {
-                handleClose();
+                setIsAdding(true)
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -40,14 +45,11 @@ const AddUser = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                setFormData({
-                    name: '',
-                    userId: '',
-                    roll: '',
-                    department: ''
-                });
+                window.location.reload();
+                handleClose();
             })
             .catch((error) => {
+                setIsAdding(true)
                 console.error('Error creating user:', error);
             });
     };
@@ -59,11 +61,13 @@ const AddUser = () => {
             </Button>
 
             <Modal
-                size="sm"
+                size="sm"   
                 show={show}
+                className='rounded-3'
                 onHide={handleClose}
                 backdrop={false}
-                style={{ backdropFilter: 'blur(2px)', border: '1px solid #0d6efd' }}
+                style={{ backdropFilter: 'blur(2px)', border: '1px solid #f8f8f8' }}
+                centered
             >
                 <Modal.Header closeButton className="border-white">
                     <Modal.Title className="text-primary">Add New User</Modal.Title>
@@ -71,32 +75,34 @@ const AddUser = () => {
                 <ModalBody>
                     <form className="d-flex flex-column gap-2">
                         {[
-                            { id: 'name', label: 'Name', placeholder: 'Enter name' },
-                            { id: 'userId', label: 'User ID', placeholder: 'Enter user ID' },
-                            { id: 'roll', label: 'Roll', placeholder: 'Enter roll' },
-                            { id: 'department', label: 'Department', placeholder: 'Enter department' }
+                            { id: 'name', label: 'Name', placeholder: 'Enter name', type: 'text' },
+                            { id: 'userId', label: 'User ID', placeholder: 'Enter user ID', type: 'number' },
+                            { id: 'roll', label: 'Roll', placeholder: 'Enter roll', type: 'text' },
+                            { id: 'department', label: 'Department', placeholder: 'Enter department', type: 'text' }
                         ].map((field) => (
                             <div key={field.id} className="form-group">
-                                <label htmlFor={field.id}>{field.label}</label>
+                                <label htmlFor={field.id} className="form-label">
+                                    {field.label} <span className="text-danger">*</span>
+                                </label>
                                 <input
-                                    type="text"
+                                    type={field.type}
                                     className="form-control"
                                     id={field.id}
                                     name={field.id}
                                     value={formData[field.id]}
                                     onChange={handleChange}
                                     placeholder={field.placeholder}
+                                    required
                                 />
                             </div>
                         ))}
                     </form>
                 </ModalBody>
-                <Modal.Footer className="border-white">
-                    <Button variant="light" className="shadow-sm" onClick={handleClose}>
-                        Cancel
-                    </Button>
-                    <Button variant="danger" className="shadow-sm" onClick={handleSubmit}>
-                        Add User
+                <Modal.Footer className="border-white" >
+                 
+                    <Button variant="primary " className="shadow-sm rounded-2" onClick={() => {handleSubmit(); handleClose();}} disabled={isAdding}>
+                        {isAdding ? 'Adding...' : 'Add User'}
+                     
                     </Button>
                 </Modal.Footer>
             </Modal>

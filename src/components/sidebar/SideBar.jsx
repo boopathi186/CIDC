@@ -8,9 +8,10 @@ const SideBar = () => {
 
     const navItems = [
         { icon: 'bi-columns-gap', label: 'Dashboard', path: '/dashboard' },
-        { icon: 'bi-chat-left-dots', label: 'Chat', path: '/leavechart' },
-        { icon: 'bi-clock-history', label: 'Attendance', path: '/attendance' },
+        { icon: 'bi-card-checklist', label: 'Chat', path: '/leavechart' }, 
         { icon: "bi bi-people" , label: 'user' , path: '/user'},
+        { icon: 'bi-clock-history', label: 'Attendance', path: '/attendance' }
+       
     ];
 
     useEffect(() => {

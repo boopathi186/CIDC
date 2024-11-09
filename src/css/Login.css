@@ -1,6 +1,6 @@
 .body {
-    /* background: linear-gradient(to right, #1d97dd, #bdbccc); */
-    background: url('C:\Users\BoopathiSelvaraj\Desktop\CIDC\REACT\attendance_mamangement\src\assets\tm-2.jpg') no-repeat center center fixed; /* {{ edit_1 }} */
+    background: linear-gradient(to right, #1d97dd, #bdbccc);
+    /* background: url('C:\Users\BoopathiSelvaraj\Desktop\CIDC\REACT\attendance_mamangement\src\assets\tm-2.jpg') no-repeat center center fixed;  */
     background-size: cover; 
 }
 

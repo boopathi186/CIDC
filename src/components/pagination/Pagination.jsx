@@ -1,5 +1,3 @@
-// PaginationComponent.js
-
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -11,8 +11,6 @@ import AddUser from '../components/modals/AddUser';
 
 const GetUsers = () => {
 
- 
-
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
  
@@ -42,10 +40,11 @@ const GetUsers = () => {
         const value = event.target.value;
         setSearchTerm(value);
         if (data) {
-            const filtered = data.filter((attendance) => (
-                (attendance.user && attendance.user.name && attendance.user.name.toLowerCase().includes(value)) ||
-                (attendance.attendanceId && attendance.attendanceId.toString().includes(value)) ||
-                (attendance.user && attendance.user.status && attendance.user.status.toLowerCase().includes(value))
+            const filtered = data.filter((user) => (
+                (user.name && user.name.toLowerCase().includes(value)) ||
+                (user.userId && user.userId.toString().includes(value)) ||
+                (user.roll && user.roll.toLowerCase().includes(value)) ||
+                (user.department && user.department.toLowerCase().includes(value))
             ));
             setFilteredData(filtered);
             setCurrentPage(0);
@@ -85,8 +84,8 @@ const GetUsers = () => {
                                 <Col lg={12} className="p-0 m-0 ">
                                     <Row className='p-0 mx-2 mb-3'>
                         
-                                        <Col lg={6} className='p-0 m-0 '>
-                                            <div className="w-100 position-relative text-end ">
+                                        <Col xl={4} lg={5} className='p-0 m-0 '>
+                                            <div className="w-100 position-relative text-end mb-3">
                                                 <i className="search bi bi-search text-secondary fs-3 position-absolute top-50 translate-middle-y"></i>
                                                 <input
                                                     className='searchbar  ps-5 border border-light shadow-sm rounded-4 p-3 '
@@ -98,7 +97,7 @@ const GetUsers = () => {
                                                 />
                                             </div>
                                         </Col>
-                                        <Col lg={6} className='p-0 m-0 d-flex align-items-center justify-content-lg-end justify-content-center fs-lg-5 mb-lg-0 mb-3 fs-1 text-primary'>
+                                        <Col  xl={8} lg={7} className='p-0 m-0 d-flex align-items-center justify-content-lg-end justify-content-center fs-lg-5 mb-lg-0 mb-3 fs-1 text-primary'>
                                            <AddUser/>
                                             
                                         </Col>
@@ -112,6 +111,7 @@ const GetUsers = () => {
                                                 handleSearch={handleSearch}
                                                 isLoading={isLoading}
                                                 onDeleteUser={onDeleteUser}
+                                                
                                             />
                                         </Col>
                                     </Row>

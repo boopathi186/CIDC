@@ -59,7 +59,7 @@ const Login = () => {
 
     if (loading) {
         return (
-            <h4 className="d-flex text-danger mt-5 justify-content-center align-items-center vh-100">
+            <h4 className="d-flex text-primary mt-5 justify-content-center align-items-center vh-100">
                 <Spinner animation="border" />
             </h4>
         );
@@ -67,12 +67,29 @@ const Login = () => {
 
     return (
         <Row className="body row-cols-lg-2 m-0 vh-100">
-            <Col lg={6} className="p-0 d-lg-block d-none text-center d-flex justify-content-center align-items-center">
-                <div className="d-flex text-white justify-content-center align-items-center vh-100">
-                    <h2  className='m-0 fs-1 '>Welcome to the Login Page</h2>
+            <Col xl={7} lg={7} sm={12} className="p-0  text-center d-flex justify-content-center align-items-center">
+                <div className="d-flex flex-column text-white justify-content-center align-items-center vh-100">
+                    <h1 className="display-4 fw-bold mb-4">Attendance Management System</h1>
+                    <div className="text-center px-3">
+                       
+                        <div className="d-flex flex-wrap justify-content-center gap-4">
+                            <div className="text-center">
+                                <i className="bi bi-calendar-check fs-1 mb-2"></i>
+                                <p className="mb-0">Daily Records</p>
+                            </div>
+                            <div className="text-center">
+                                <i className="bi bi-people-fill fs-1 mb-2"></i>
+                                <p className="mb-0">Employee Management</p>
+                            </div>
+                            <div className="text-center">
+                                <i className="bi bi-graph-up fs-1 mb-2"></i>
+                                <p className="mb-0">Analytics</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </Col>
-            <Col lg={6} sm={12} className="d-flex justify-content-center align-items-center">
+            <Col xl={5} lg={5} sm={12} className="d-flex justify-content-center align-items-center">
                 <div className="login w-100">
                     <div className="container bg-light col-12 form-control w-75 border border-0 rounded-3 shadow p-0">
                         <Formik
