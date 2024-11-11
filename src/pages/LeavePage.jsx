@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import Header from '../components/header/Header';
 import Toggle from '../components/header/Toggle';
 import SideBar from '../components/sidebar/SideBar';
@@ -27,7 +27,7 @@ const LeavePage = () => {
         if (data) {
             setFilteredData(data);
         }
-    }, [data],refetch);
+    }, [data], refetch);
     data && console.log(data);
 
     const handleSearch = (event) => {
@@ -69,81 +69,25 @@ const LeavePage = () => {
                         <SideBar />
                     </Col>
 
-                    <Col lg={11} className=" p-0 ">
-                        <Row className="mx-1 justify-content-center m-0 p-0">
-                            <Col lg={12} className="p-0 m-0 ">
-
-                                <Row className='p-0 mx-2 mb-3'>
-                                    <Col lg={8} md={12} className='p-0 m-0 mb-lg-0 mb-3'>
-                                        <div className='d-flex flex-wrap align-items-center justify-content-lg-start justify-content-center gap-2'>
-                                            {[ 'Sick Leave', 'Planned Leave', 'UnPlanned Leave'].map((leave) => (
-                                                <button
-                                                    key={leave}
-                                                    className="btn btn-primary flex-grow-1 flex-sm-grow-0 flex-basis-0 min-width-150"
-                                                    style={{minWidth: '150px'}}
-                                                    onClick={() => document.getElementById(leave).scrollIntoView({ behavior: 'smooth' })}
-                                                >
-                                                    {leave}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </Col>
-
-                                    <Col lg={4} className='p-0 m-0 '>
-                                        <div className="w-100 position-relative text-end ">
-                                            <i className="search bi bi-search text-secondary fs-3 position-absolute top-50 translate-middle-y"></i>
-                                            <input
-                                                className='searchbar  ps-5 border border-light shadow-sm rounded-4 p-3 '
-                                                onChange={handleSearch}
-                                                type="text"
-                                                value={searchTerm}
-                                                placeholder="Search for names..."
-                                                title="Type in a name"
-                                            />
-                                        </div>
+                    <Col lg={11} className=" p-0 m-0 px-2">
+                                <Row className='px-2 mx-2 mb-3'>
+                                    <Col lg={12} className='p-0 m-0 mb-lg-0 mb-3'>
+                                      <h4 className='fw-bold text-center text-lg-start text-primary '>Leave Record</h4>
                                     </Col>
                                 </Row>
-
-                            </Col>
-                            <Row className='p-0 m-0 mx-2'>
-                                <Col lg={12} className=" p-0 m-0">
-                                    <LeaveTable
-                                        records={records}
-                                        firstIndex={firstIndex}
-                                        searchTerm={searchTerm}
-                                        handleSearch={handleSearch}
-                                        isLoading={isLoading}
-                                    />
-                                </Col>
-                            </Row>
-
-                            {/* Pagination */}
-                            <Row className='p-0 m-0 mx-2'>
-                                <Col lg={12} className="d-flex justify-content-end mt-3 mb-3">
-                                    <PaginationComponent
-                                        pageCount={TotalPages}
-                                        handlePageClick={handlePageClick}
-                                    />
-                                </Col>
-                            </Row>
-
-                            <Row className='m-0 p-0 h-25'>
-                                <Col lg={6}  className="m-0 p-0 col-12 mb-lg-0 mb-3" id='Planned Leave'>
-                                <PlannedTable/>
-                                </Col>
-
-                                <Col lg={6} className="p-0 px-lg-2 px-0 mb-3" id='Sick Leave'>
-                                <SickLeaveTable/>
-                                </Col>
-                            </Row>
-                                <Row>
-                                    <Col lg={12} className="p-0 m-0">
+                          <Row>
+                            <Tabs defaultActiveKey="Absents" id="justify-tab-example"  className='p-2 fw-bold 'justify >
+                                <Tab eventKey="Absents" title="Absents" className='text-nowrap text-primary '>
+                                  <LeaveTable   records={records} firstIndex={firstIndex}  searchTerm={searchTerm}  handleSearch={handleSearch}  isLoading={isLoading} />
+                                </Tab>
+                                <Tab eventKey="Sick Leave" title="Sick Leave" className='text-nowrap'>
+                                    <SickLeaveTable/>
+                                </Tab>
+                                <Tab eventKey="Planned Leave" title="Planned Leave" className='text-nowrap'>
                                     <PlannedTable/>
-                                    </Col>
-                                </Row>
-                            
-
-                        </Row>
+                                </Tab>             
+                            </Tabs>
+                            </Row>
                     </Col>
                 </Row>
             </div>

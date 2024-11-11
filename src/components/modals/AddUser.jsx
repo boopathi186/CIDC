@@ -56,8 +56,8 @@ const AddUser = () => {
 
     return (
         <div>
-            <Button onClick={handleShow}>
-                <i className="mx-2 bi bi-person-plus-fill"></i>Add User
+            <Button className='shadow-sm rounded-2 py-2 px-3' onClick={handleShow}>
+                <i className="mx-2 bi bi-person-plus-fill "></i>Add User
             </Button>
 
             <Modal
