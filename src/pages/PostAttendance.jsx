@@ -24,8 +24,7 @@ const PostAttendance = () => {
                     </Col>
 
                     <Col lg={11} className='m-0 p-0'>
-                     <h1>Hiii
-                     </h1>
+                      
                     </Col>
             </Row>
             </div>

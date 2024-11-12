@@ -15,7 +15,7 @@ const GetUsers = () => {
     const [currentPage, setCurrentPage] = useState(0);
  
 
-    const recordsPerPage = 10;
+    const recordsPerPage = 8;
     const firstIndex = currentPage * recordsPerPage;
     const lastIndex = firstIndex + recordsPerPage;
 
@@ -98,8 +98,7 @@ const GetUsers = () => {
                                             </div>
                                         </Col>
                                         <Col  xl={8} lg={7} className='p-0 m-0 d-flex align-items-center justify-content-lg-end justify-content-center fs-lg-5 mb-lg-0 mb-3 fs-1 text-primary'>
-                                           <AddUser/>
-                                            
+                                            {sessionStorage.getItem('role') === 'admin' && <AddUser/>}
                                         </Col>
                                     </Row>
                                     <Row className='p-0 m-0 mx-2'>

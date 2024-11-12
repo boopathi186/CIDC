@@ -76,7 +76,7 @@ const AddUser = () => {
                     <form className="d-flex flex-column gap-2">
                         {[
                             { id: 'name', label: 'Name', placeholder: 'Enter name', type: 'text' },
-                            { id: 'userId', label: 'User ID', placeholder: 'Enter user ID', type: 'number' },
+                            // { id: 'userId', label: 'User ID', placeholder: 'Enter user ID', type: 'number' },
                             { id: 'roll', label: 'Roll', placeholder: 'Enter roll', type: 'text' },
                             { id: 'department', label: 'Department', placeholder: 'Enter department', type: 'text' }
                         ].map((field) => (

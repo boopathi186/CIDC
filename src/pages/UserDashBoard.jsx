@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import LeavePage from './LeavePage.jsx';
+import AdminDashboard from './AdminDashBoard.jsx';
 
-const UserDashBoard = () => {
-  return (
-    <div>UserDashBoard</div>
-  )
-}
 
-export default UserDashBoard
+const UserDashboard = () => {
+
+  
+    return (
+        <>
+         <AdminDashboard/>
+        </>
+    );
+};
+
+export default UserDashboard;

@@ -62,7 +62,7 @@ export const userApi = createApi({
         }),
         postAttendance: builder.mutation({
             query: (attendanceData) => ({
-                url: 'attendance/addattendance',
+                url: 'attendance/add-attendance',
                 method: 'POST',
                 body: attendanceData,
             }),

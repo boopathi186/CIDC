@@ -4,7 +4,6 @@ import Header from '../components/header/Header';
 import Toggle from '../components/header/Toggle';
 import SideBar from '../components/sidebar/SideBar';
 import { useGetLeaveRecordQuery } from '../redux/ApiSlice';
-import PaginationComponent from '../components/pagination/Pagination';
 import LeaveTable from '../components/table/LeaveTable';
 import PlannedTable from '../components/table/PlannedTable';
 import SickLeaveTable from '../components/table/SickLeaveTable';

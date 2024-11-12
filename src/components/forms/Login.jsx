@@ -7,6 +7,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../../css/Login.css';
+import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
     const [loading, setLoading] = useState(true);
@@ -22,10 +23,13 @@ const Login = () => {
     const handleSubmit = async (values) => {
         try {
             const response = await axios.post('http://localhost:8080/login', values);
-            console.log(response.data);
             if (response.data) {
                 sessionStorage.setItem('token', response.data);
-                navigate('/dashboard');
+                const decodedToken = jwtDecode(response.data);
+                if (decodedToken && decodedToken.role) {
+                    sessionStorage.setItem('role', decodedToken.role);
+                }
+                navigate(decodedToken.role === 'admin' ? '/admindashboard' : '/userdashboard');
                 Swal.fire({
                     toast: true,
                     position: "top-end",
@@ -67,11 +71,10 @@ const Login = () => {
 
     return (
         <Row className="body row-cols-lg-2 m-0 vh-100">
-            <Col xl={7} lg={7} sm={12} className="p-0  text-center d-flex justify-content-center align-items-center">
+            <Col xl={7} lg={7} sm={12} className="p-0 text-center d-flex justify-content-center align-items-center">
                 <div className="d-flex flex-column text-white justify-content-center align-items-center vh-100">
                     <h1 className="display-4 fw-bold mb-4">Attendance Management System</h1>
                     <div className="text-center px-3">
-                       
                         <div className="d-flex flex-wrap justify-content-center gap-4">
                             <div className="text-center">
                                 <i className="bi bi-calendar-check fs-1 mb-2"></i>

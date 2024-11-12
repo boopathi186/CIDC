@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/forms/Login';
-import DashBoard from './pages/DashBoard';
 import NotFound from './pages/NotFoundPage';
 import PrivateRoute, { PrivateRoutes } from './components/private-Router/Private-Router';
 import GetUsers from './pages/GetUsers';
-import GetAttendance from './pages/GetAttendance';
 import LeavePage from './pages/LeavePage';
 import PostAttendance from './pages/PostAttendance';
+import UserDashBoard from './pages/UserDashBoard';
+import AdminDashBoard from './pages/AdminDashBoard';
 
 
 
@@ -24,7 +24,8 @@ function App() {
             </Route>
           </>
           <Route element={<PrivateRoute />}>
-            <Route path='/dashboard' element={<DashBoard />} />
+            <Route path='/admindashboard' element={<AdminDashBoard/>}/>
+            <Route path='/userdashboard' element={<UserDashBoard />} />
             <Route path='/user'  element={<GetUsers/>}/>
             <Route path='/leavechart'  element={<LeavePage/>}/>
             <Route path='/attendance'  element={<PostAttendance/>}/>

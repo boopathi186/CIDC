@@ -79,13 +79,14 @@ const UserTable = ({ records, firstIndex, isLoading, onDeleteUser }) => {
                                                         userId={selectedUserId}
                                                         onDelete={(userId) => onDeleteUser(userId)} 
                                                     />
-
-                                                    <Button
-                                                        variant="none px-sm-1 px-0"
-                                                        onClick={() => handleDeleteConfirmation(user.userId)}
-                                                    >
-                                                        <i className="bi bi-trash text-danger bg-light rounded-2 shadow-sm"></i>
-                                                    </Button>
+                                                    {sessionStorage.getItem('role') === 'admin' && (
+                                                        <Button
+                                                            variant="none px-sm-1 px-0"
+                                                            onClick={() => handleDeleteConfirmation(user.userId)}
+                                                        >
+                                                            <i className="bi bi-trash text-danger bg-light rounded-2 shadow-sm"></i>
+                                                        </Button>
+                                                    )}
                                                 </td>
                                             </tr>
                                         ))
